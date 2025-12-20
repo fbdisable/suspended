@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Support - Account Status</title>
+    <style>
+        /* --- General Settings --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* --- POPUP STYLES --- */
+        #congrats-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1877F2 0%, #0056b3 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .congrats-text {
+            color: #ffffff;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: popIn 0.5s ease-out;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        /* --- MAIN CONTENT STYLES --- */
+        #main-content {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .fb-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .fb-wordmark {
+            color: #1877F2;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .success-icon {
+            color: #42b72a;
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            color: #1c1e21;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #606770;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #1877F2;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #166fe5;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @media (max-width: 600px) {
+            .congrats-text { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="congrats-popup">
+        <div class="congrats-text">CONGRATULATIONS</div>
+    </div>
+
+    <div id="main-content">
+        <div class="card">
+            <svg class="fb-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                <path fill="#1877F2" d="M1024 512c0-282.77-229.23-512-512-512S0 229.23 0 512c0 255.55 187.23 467.37 432 505.78V660H302V512h130V399.2C432 270.88 508.44 200 625.39 200c56.02 0 114.61 10 114.61 10v126H675.47c-63.6 0-83.47 39.47-83.47 79.92V512h142l-22.7 148H592v357.78C836.77 979.37 1024 767.55 1024 512z"/>
+                <path fill="#ffffff" d="M711.3 660L734 512H592V415.92c0-40.45 19.87-79.92 83.47-79.92H740V210s-58.59-10-114.61-10C508.44 200 432 270.88 432 399.2V512H302v148h130v357.78c26.54 4.16 53.76 6.22 81.39 6.22 26.68 0 52.95-1.93 78.61-5.78V660h89.3z"/>
+            </svg>
+            
+            <span class="fb-wordmark">facebook</span>
+
+            <div class="success-icon">✓</div>
+
+            <h1>Account Access Restored</h1>
+            
+            <p>We have successfully verified your identity. The suspension on your account has been lifted.</p>
+            
+            <p style="font-size: 14px;">Your Facebook account is now fully active. Click below to return to the app.</p>
+
+            <button class="btn" onclick="openFacebookApp()">Go to News Feed</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Popup Animation Logic
+        window.onload = function() {
+            const popup = document.getElementById('congrats-popup');
+            const mainContent = document.getElementById('main-content');
+
+            setTimeout(() => {
+                popup.style.opacity = '0';
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                    mainContent.style.opacity = '1';
+                }, 500); 
+            }, 2000); 
+        };
+
+        // 2. Redirect Logic (App opener)
+        function openFacebookApp() {
+            // Android/iOS Deep link for News Feed
+            var appUrl = "fb://feed";
+            // Fallback website link
+            var webUrl = "https://www.facebook.com";
+
+            // Try to open App
+            window.location.href = appUrl;
+
+            // Agar app nahi hai ya PC par hai, to thodi der baad website khul jayegi
+            setTimeout(function() {
+                window.location.href = webUrl;
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
