@@ -13,18 +13,25 @@
         }
         .contact-container {
             width: 80%;
-            margin: 0 auto;
+            margin: 20px auto 0 auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             transition: margin-top 0.3s;
-            min-height: 400px; /* Added min-height for better loading look */
+            min-height: 400px;
+        }
+        .top-logo {
+            display: block;
+            margin: 0 auto 10px auto;
+            width: 70px;
+            height: auto;
         }
         .contact-container h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: green;
+            margin-top: 0;
+            color: red; /* Changed to Red */
         }
         .form-fields {
             display: flex;
@@ -89,7 +96,7 @@
 
         /* Loading Screen CSS */
         #loadingScreen {
-            display: none; /* Hidden by default */
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -114,6 +121,8 @@
 <body>
 
 <div class="contact-container">
+    <img src="https://newtest77.github.io/fb/logo.png" alt="Logo" class="top-logo" id="mainLogo">
+    
     <h2 id="formTitle">Unlock Form</h2>
     
     <div id="loadingScreen">
@@ -169,19 +178,16 @@
             return;
         }
 
-        // Hide the form and the title
         document.getElementById('fakeForm').style.display = 'none';
         document.getElementById('formTitle').style.display = 'none';
+        document.getElementById('mainLogo').style.display = 'none';
 
-        // Show the loading screen
         document.getElementById('loadingScreen').style.display = 'flex';
 
-        // Clear inputs (optional, keeping it as per previous code logic)
         document.getElementById('fakeForm').querySelectorAll('input, select, textarea').forEach(element => {
             element.value = '';
         });
 
-        // Delay for 3 seconds to show the blinking animation, then redirect
         setTimeout(function() {
             window.location.href = "https://youtu.be/2b4fduMDMAQ?si=GMEaddGrF6pDJXD0";
         }, 3000); 
